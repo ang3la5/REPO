@@ -1,5 +1,2 @@
-<<<<<<< HEAD
-My first file in GitHub
-=======
-fakelos 
->>>>>>> 2b773ab (Added REPO directory)
+Αγγελική Σταθονίκου 2578
+Μαριάννα Σωτηρίου 2585
