@@ -28,3 +28,21 @@ exports.loginUser = async (req, res) => {
   );
   res.status(200).json({ token, role: user.role });
 };
+
+exports.promoteUserToAdmin = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.role = 'admin'; // Update the user's role
+    await user.save(); // Save the changes to the database
+
+    res.status(200).json({ message: `${user.username} has been promoted to admin.` });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
