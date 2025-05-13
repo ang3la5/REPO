@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const sequelize = require('./config/database'); // Use direct sequelize import
 const userRoutes = require('./routes/userRoutes');
+const movieRoutes = require('./routes/movieRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -24,6 +26,8 @@ app.use(express.json());
 
 // API Routes
 app.use('/api/users', userRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;
