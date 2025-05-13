@@ -1,5 +1,5 @@
 // controllers/reviewController.js
-const { Review, Movie } = require('../models');
+const { Review, Movie, User } = require('../models');
 
 const createReview = async (req, res) => {
   const { movieId, rating, comment } = req.body;
@@ -86,9 +86,31 @@ const updateMovieRating = async (movieId) => {
   return await movie.save();
 };
 
+const getReviewsForMovie = async (req, res) => {
+  const { movieId } = req.params;
+
+  try {
+    const reviews = await Review.findAll({
+      where: { movie_id: movieId },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'username']
+        }
+      ],
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.status(200).json(reviews);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createReview,
   updateReview,
   deleteReview,
+  getReviewsForMovie,
   updateMovieRating
 };

@@ -5,6 +5,10 @@ const sequelize = require('./config/database'); // Use direct sequelize import
 const userRoutes = require('./routes/userRoutes');
 const movieRoutes = require('./routes/movieRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const seasonRoutes = require('./routes/seasonRoutes');
+const episodeRoutes = require('./routes/episodeRoutes');
+const seriesRoutes = require('./routes/seriesRoutes');
+
 require('dotenv').config();
 
 const app = express();
@@ -28,6 +32,10 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/seasons', seasonRoutes);
+app.use('/api/episodes', episodeRoutes);
+app.use('/api/series', seriesRoutes);
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;
