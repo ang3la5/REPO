@@ -1,8 +1,9 @@
 const express = require('express');
-const { createEpisode } = require('../controllers/episodeController');
+const { deleteEpisode } = require('../controllers/episodeController');
 const { authenticate, isAdmin } = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
-router.post('/', authenticate, isAdmin, createEpisode);
+router.delete('/:id', authenticate, isAdmin, deleteEpisode);
 
 module.exports = router;
