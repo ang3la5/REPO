@@ -5,12 +5,14 @@ const sequelize = require('./config/database'); // Use direct sequelize import
 const userRoutes = require('./routes/userRoutes');
 const movieRoutes = require('./routes/movieRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
-const seasonRoutes = require('./routes/seasonRoutes');
-const episodeRoutes = require('./routes/episodeRoutes');
 const seriesRoutes = require('./routes/seriesRoutes');
 const preferenceRoutes = require('./routes/preferenceRoutes');
 const listRoutes = require('./routes/listRoutes');
 const statRoutes = require('./routes/statRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
+const seriesImportRoutes = require('./routes/seriesImportRoutes');
+const seasonRoutes = require('./routes/seasonRoutes');
+const episodeRoutes = require('./routes/episodeRoutes');
 
 require('dotenv').config();
 
@@ -35,12 +37,14 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/reviews', reviewRoutes);
-app.use('/api/seasons', seasonRoutes);
-app.use('/api/episodes', episodeRoutes);
 app.use('/api/series', seriesRoutes);
 app.use('/api/preferences', preferenceRoutes);
 app.use('/api/lists', listRoutes);
 app.use('/api/stats', statRoutes);
+app.use('/api/movies', recommendationRoutes); 
+app.use('/api/movies', seriesImportRoutes);
+app.use('/api/seasons', seasonRoutes);
+app.use('/api/episodes', episodeRoutes);
 
 
 // Start Server

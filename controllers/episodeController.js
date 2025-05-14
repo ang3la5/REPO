@@ -1,16 +1,14 @@
-const { Episode, Season } = require('../models');
+const { Episode } = require('../models');
 
-exports.createEpisode = async (req, res) => {
-  const { seasonId, number, title, description } = req.body;
+exports.deleteEpisode = async (req, res) => {
+  const { id } = req.params;
 
   try {
-    const season = await Season.findByPk(seasonId);
-    if (!season) {
-      return res.status(400).json({ message: "Invalid season ID." });
-    }
+    const episode = await Episode.findByPk(id);
+    if (!episode) return res.status(404).json({ message: "Episode not found" });
 
-    const episode = await Episode.create({ season_id: seasonId, number, title, description });
-    res.status(201).json({ message: "Episode created", episode });
+    await episode.destroy();
+    res.status(200).json({ message: "Episode deleted" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

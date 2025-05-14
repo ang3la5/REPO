@@ -1,8 +1,9 @@
 const express = require('express');
-const { createSeason } = require('../controllers/seasonController');
+const { deleteSeason } = require('../controllers/seasonController');
 const { authenticate, isAdmin } = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
-router.post('/', authenticate, isAdmin, createSeason);
+router.delete('/:id', authenticate, isAdmin, deleteSeason);
 
 module.exports = router;
