@@ -2,8 +2,8 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const ListMovie = sequelize.define('ListMovie', {
-  list_id: { type: DataTypes.INTEGER, allowNull: false },
-  movie_id: { type: DataTypes.INTEGER, allowNull: false },
+  // You can add extra metadata if you want, like:
+  // addedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 });
 
 module.exports = ListMovie;

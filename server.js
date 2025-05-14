@@ -8,6 +8,9 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const seasonRoutes = require('./routes/seasonRoutes');
 const episodeRoutes = require('./routes/episodeRoutes');
 const seriesRoutes = require('./routes/seriesRoutes');
+const preferenceRoutes = require('./routes/preferenceRoutes');
+const listRoutes = require('./routes/listRoutes');
+const statRoutes = require('./routes/statRoutes');
 
 require('dotenv').config();
 
@@ -35,6 +38,9 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/seasons', seasonRoutes);
 app.use('/api/episodes', episodeRoutes);
 app.use('/api/series', seriesRoutes);
+app.use('/api/preferences', preferenceRoutes);
+app.use('/api/lists', listRoutes);
+app.use('/api/stats', statRoutes);
 
 
 // Start Server
