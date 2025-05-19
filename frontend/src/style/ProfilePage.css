@@ -1,0 +1,162 @@
+/* Base layout */
+.profile-page {
+  background-color: #f9f3e5;
+  min-height: 100vh;
+  font-family: 'Boogaloo', sans-serif;
+}
+
+/* AppBar styles */
+.profile-appbar {
+  background-color: #d86116 !important;
+}
+
+.profile-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.logo-img {
+  height: 120px;
+  margin-right: 10px;
+}
+
+.profile-avatar {
+  background-color: #d86116;
+  width: 64px !important;
+  height: 64px !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Navigation Button Styling */
+.profile-toolbar .MuiButton-root {
+  font-size: 1.25rem !important;
+  font-weight: bold;
+  color: #f9f3e5 !important;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+/* Section headers */
+.profile-section {
+  margin-top: 2rem;
+}
+
+.profile-section h6 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Lists & Buttons */
+.profile-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.profile-buttons .MuiButton-contained {
+  background-color: #222 !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+/* Reviews */
+.profile-review-card {
+  margin-top: 1rem;
+  border: 1px solid #1a1a1a1f;
+  border-radius: 10px;
+}
+
+.profile-review-card .MuiCardContent-root {
+  padding: 1rem 1.5rem;
+}
+
+.profile-review-rating {
+  color: #f39c12;
+}
+
+/* Preferences */
+.profile-preferences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.profile-preferences .MuiChip-root {
+  background-color: #222;
+  color: white;
+  font-weight: bold;
+}
+
+/* Preferences edit icon */
+.profile-section .MuiIconButton-root {
+  padding: 4px;
+  margin-left: 4px;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.profile-section .MuiIconButton-root:hover {
+  color: #d86116;
+}
+
+/* Saved message */
+.preferences-saved-message {
+  margin-left: 10px;
+  color: green;
+  font-weight: bold;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.profile-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+}
+
+.profile-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.profile-carousel::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+/* Ensure text fields (if any) are bold with themed borders */
+.MuiOutlinedInput-root {
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-width: 2px;
+  border-color: #d86116;
+  background-color: #f9f3e55e;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #f9f3e5 !important;
+  border-width: 2px;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-width: 3px;
+  border-color: #f9f3e5;
+  background-color: #f9f3e583;
+}

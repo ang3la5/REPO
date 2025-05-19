@@ -1,0 +1,120 @@
+/* Reset margin and background */
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
+
+/* Make Email and Password input borders bold */
+.MuiOutlinedInput-root {
+  font-weight: bold; /* bold text inside */
+  border-radius: 6px;
+}
+
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-width: 2px; /* ⬅️ bold border */
+  border-color: #d86116; /* optional: orange */
+  background-color: #f9f3e55e;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #f9f3e5 !important; /* your orange */
+  border-width: 2px;     /* optional: bold effect on hover */
+}
+
+/* Optional: bold border on focus */
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-width: 3px;
+  border-color: #f9f3e5;
+  background-color: #f9f3e583;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #000000;
+  font-family: 'Boogaloo', cursive !important;
+  font-weight: bold;
+}
+
+.appbar {
+  background-color: #f9f3e5 !important; /* Try !important to override MUI styles */
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.logo-text {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+.login {
+  position: relative;
+  background-color: #f9f3e5;
+  color: rgb(0, 0, 0);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+
+.login::before {
+  content: "";
+  position: absolute;
+  color: #000000 !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/public/movieswallpapers.jpg); /* 🔁 Replace with your actual image path */
+  background-size: cover;
+  background-position: center;
+  animation: bgMove 10s infinite alternate ease-in-out;
+  filter: blur(8px);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+/* Ensure content is above the background */
+.loginpage > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Login Page Container */
+.login-container {
+  padding-top: 2rem;
+  background-color: #f9f3e5 !important;
+  color: #000000 !important;
+  min-height: 100vh;
+}
+
+/* Buttons */
+.login-button {
+  border: 2px solid #d86116 !important;  
+  margin-top: 1rem;
+  font-weight: bold;
+  background-color: #d86116 !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.login-button:hover {
+  background-color: #b44c11 !important;
+}
+
+.back-button {
+  margin-top: 1rem;
+  color: #000000 !important;
+}
+
+/* Status Text */
+.status-text {
+  margin-top: 1rem;
+}
+
+@keyframes bgMove {
+  0% { background-position: center; }
+  100% { background-position: center 10px; }
+}

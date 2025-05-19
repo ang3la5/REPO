@@ -1,0 +1,94 @@
+.contact-header {
+  background-color: #d86116 !important;
+  box-shadow: none;
+}
+
+.contact-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;                      
+  padding: 0 2rem;
+  background-color: #d86116;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  padding-right: 16px;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+
+.contact-logo {
+  height: 100px;
+}
+
+.contact-toolbar .MuiButton-root {
+  font-size: 1rem !important;
+  font-weight: bold;
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+.contact-page {
+  background-color: #f9f3e5;
+  min-height: 100vh;
+  padding: 160px 0 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 0;
+  justify-content: flex-start; 
+  font-family: 'Boogaloo', sans-serif;
+  padding-top: 120px;
+}
+
+.contact-container {
+  max-width: 600px;
+  width: 100%;                      /* 👈 Force it to fit screen */
+  background: white;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.contact-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.contact-subtitle {
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-input .MuiOutlinedInput-root {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.contact-submit {
+  background-color: #d86116 !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 0.75rem;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.contact-submit:hover {
+  background-color: #b24d0f !important;
+}
+
+.language-toggle {
+  margin-right: 8px;
+}

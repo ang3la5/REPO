@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f9f3e5 !important;
+  font-family: 'Boogaloo', cursive !important;
+  color: #000000 !important;
+}
+
+* {
+  font-family: 'Boogaloo', cursive !important;
+}
+
+.movie-detail-page {
+  padding-bottom: 4rem;
+}
+
+.movie-detail-appbar {
+  background-color: #f9f3e5 !important;
+  color: #000 !important;
+}
+
+.movie-detail-logo {
+  height: 80px;
+  cursor: pointer;
+}
+
+.MuiButton-root {
+  color: #000000;
+  text-transform: none;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+.movie-detail-card {
+  display: flex;
+  background-color: white !important;
+  color: black !important;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.movie-detail-content {
+  padding: 1.5rem;
+}
+
+.review-section {
+  background-color: #f9f3e5 !important;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.review-section h5,
+.review-section h6,
+.review-section p,
+.review-section label {
+  color: #000000 !important;
+}
+
+.review-form {
+  background-color: #f9f3e5 !important;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.review-comment-input .MuiOutlinedInput-root {
+  background-color: #ffffff !important;
+  border-radius: 8px;
+}
+
+.review-button {
+  background-color: #d8561d !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.review-button:hover {
+  background-color: #bf4614 !important;
+}
+
+.review-card {
+  background-color: #fff !important;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  color: #000 !important;
+  border: 1px solid #ccc !important;
+}
+
+.dialog-content {
+  background-color: #f9f3e5 !important;
+  padding: 1rem;
+}
+
+.dialog-actions {
+  padding: 1rem;
+}
+
+.dialog-select {
+  background-color: #ffffff !important;
+  border-radius: 6px;
+}
+
+.logo-img {
+  height: 120px;
+  margin-right: 10px;
+}

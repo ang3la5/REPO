@@ -1,0 +1,313 @@
+a {
+  text-decoration: none;
+}
+
+.user-home-page::before{
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/public/movieswallpapers.jpg); /* 🔁 Replace with your actual image path */
+  background-size: cover;
+  background-position: center;
+  animation: bgMove 5s infinite alternate ease-in-out;
+  filter: blur(8px);
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.user-home-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.user-home-page {
+  background-color: #f9f3e5;
+  color: #070300;
+  min-height: 100vh;
+  font-family: 'Boogaloo', sans-serif;
+  z-index: 0;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  animation: slideFadeIn 1s ease-out forwards;
+  opacity: 0;
+  z-index: 0;
+}
+
+.hero-title {
+  font-family: 'Boogaloo', cursive !important;
+  text-align: center;
+  line-height: 2;
+  margin: 0 auto;
+  max-width: 150%;
+  color: #000000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.5rem;
+  z-index: 0;
+}
+
+.hero h4 {
+  font-weight: bold;
+  animation: slideFadeIn 1.2s ease-out forwards;
+  opacity: 0;
+  font-size: clamp(3rem, 7vw, 5rem);
+  color: #000000 !important;
+  z-index: 0;
+}
+
+.hero .MuiTypography-root {
+  color: #fff !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.appbar {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  animation: slideFadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+  align-items: center;
+  height: auto;            
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  padding: 0rem;
+  border-radius: 12px;
+  border: #d8561d !important;
+  animation: slideFadeInUp 1.2s ease-out forwards;
+  opacity: 0;
+  z-index: 0;
+}
+
+.user-home-page .MuiTextField-root {
+  width: 100%;
+  background-color: #ffffffcc;
+  border-radius: 30px !important;
+  z-index: 0;
+}
+
+.user-home-page .MuiAppBar-root {
+  background-color: #f9f3e5;
+  z-index: 0;
+}
+
+.user-home-page .MuiToolbar-root {
+  display: flex;
+  justify-content: space-between;
+  z-index: 0;
+}
+
+.user-home-logo-img {
+  height: 120px;
+  margin-right: 10px;
+  z-index: 0;
+}
+
+.logo-img {
+  cursor: pointer;
+  height: 120px;
+  animation: fadeIn ease 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  z-index: 0;
+}
+
+a:has(.logo-img) {
+  text-decoration: none;
+  z-index: 0;
+}
+
+.user-home-page .MuiButton-root {
+  color: #000000;
+  text-transform: none;
+  font-weight: bold;
+  font-size: 20px;
+  z-index: 0;
+}
+
+/* Section header */
+.user-home-page .MuiContainer-root h5 {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #050200;
+  z-index: 0;
+}
+
+/* Movie Card */
+.user-home-page .movie-card {
+  background-color: #d8561d;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.user-home-page .movie-card:hover {
+  transform: scale(1.05) rotateZ(-3deg);
+  box-shadow: 0 10px 25px #d8561d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+ 
+}
+
+.user-home-page .movie-card img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 0;
+}
+
+.user-home-page .movie-card .MuiCardContent-root {
+  padding: 10px 16px;
+  z-index: 0;
+}
+
+.user-home-page .movie-card .MuiTypography-subtitle1 {
+  font-weight: bold;
+  margin-bottom: 4px;
+  z-index: 0;
+}
+
+.user-home-page .movie-card .MuiTypography-body2 {
+  color: #bbbbbb;
+  font-size: 0.85rem;
+  z-index: 0;
+}
+
+/* Fade-in animation */
+.user-home-fade-in {
+  animation: fadeIn ease 2s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  z-index: 0;
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff;
+  width: 0;
+  animation: typing 3s steps(35, end) forwards, blink 0.7s step-end infinite;
+}
+
+.fade-in-card {
+  animation: fadeInUp 0.6s ease both;
+  animation-delay: 0.1s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bgMove {
+  0% { background-position: center; }
+  100% { background-position: center 10px; }
+}
+
+.search-and-calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.react-calendar {
+  font-family: 'Boogaloo', cursive;
+  background-color: #f9f3e5 !important;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1) !important;
+}
+
+.react-calendar__tile--active {
+  background: #d8561d !important; 
+  color: #f9f3e5 !important;
+  font-weight: bold;
+}
+
+.react-calendar__tile {
+  padding: 0.75rem 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.react-calendar__tile:hover {
+  background: #d8561d !important;
+  color: white !important;
+}
+
+.react-calendar__tile--now {
+  background: #3b19b998 !important;
+  font-weight: bold;
+  border: 2px slid #3b19b998 !important;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  color: #d8561d !important;
+  font-weight: bold;
+  font-size: 1rem;
+}

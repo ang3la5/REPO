@@ -1,0 +1,109 @@
+{
+  "welcome": "Welcome to CineVerse",
+  "login": "Login",
+  "logout": "Logout",
+  "search_placeholder": "Search...",
+  "Profile": "Profile",
+  "home": "Home",
+  "Contact": "Contact",
+  "email": "Email",
+  "password": "Password",
+  "backToHome": "Back to Home",
+  "loggingIn": "Logging in",
+  "homepage": {
+    "hero": "Track What You Watch.\nDiscover What to Watch Next."
+  },
+  "signup": "Sign Up",
+  "trending": {
+    "movies": "Trending Movies",
+    "series": "Trending Series"
+  },
+    "register": "Register",
+  "username": "Username",
+  
+  "registering": "Registering...",
+  "loading": "Loading...",
+  "profileUpdated": "Profile updated successfully!",
+  "profileUpdateError": "Error updating profile.",
+  "reviewDeleted": "Review deleted",
+  "reviewEdited": "Review edited",
+  "Movies": "Movies",
+  "Series": "Series",
+  "movies": "movies",
+  "series": "Series",
+  "contact": "Contact",
+  "Recommended Movies": "Recommended Movies",
+  "Recommended TV Shows": "Recommended TV Shows",
+  "Pick a day": "Pick a day",
+  "Search movies & Discover your next watch": "Search movies & Discover your next watch",
+  "footer": {
+  "tagline": "Your gateway to movies, shows, and reviews.",
+  "contact": "Contact",
+  "location": "CineVerse HQ, Arta, Greece",
+  "followUs": "Follow Us",
+  "navigation": "Navigation"
+  },
+  "profile.edit": "Edit Profile",
+  "profile.cancel": "Cancel",
+  "profile.save": "Save Changes",
+  "profile.username": "Username",
+  "profile.role": "CineFan",
+
+  "lists": {
+  "myLists": "My Lists",
+  "newList": "New List",
+  "createNew": "Create New List",
+  "editList": "Edit List",
+  "listName": "List Name",
+  "remove": "Remove",
+  "removeMovie": "Remove Movie",
+  "confirmRemoveMovie": "Are you sure you want to remove \"{{title}}\" from this list?",
+  "movieRemoved": "\"{{title}}\" removed from list.",
+  "movieRemoveFailed": "Failed to remove \"{{title}}\" from list.",
+  "confirmDeleteList": "Delete this list?",
+  "errorDeletingList": "Error deleting list",
+  "errorUpdatingList": "Failed to update list",
+  "noLists": "You have no lists yet."
+},
+"cancel": "Cancel",
+"create": "Create",
+"save": "Save",
+"remove": "Remove",
+
+"reviews": {
+  "myReviews": "My Reviews",
+  "none": "No reviews yet.",
+  "untitled": "Untitled",
+  "rating": "Rating"
+},
+
+"preferences": {
+  "title": "Preferences",
+  "saved": "Changes Saved.",
+  "genres": "Genres:",
+  "actors": "Favorite Actors:",
+  "directors": "Favorite Directors:"
+},
+
+"leaderboard": {
+  "title": "Leaderboard",
+  "reviews": "Reviews",
+  "level": "Level"
+},
+
+"contacts": {
+  "title": "Contact Us",
+  "subtitle": "Got a question, suggestion, or feedback? Send us a message and we’ll get back to you!",
+  "name": "Name",
+  "email": "Email",
+  "subject": "Subject",
+  "message": "Message",
+  "send": "Send Message"
+},
+
+"browseByGenre": "Browse Movies by Genre",
+"selectGenre": "Select a genre"
+
+
+
+}

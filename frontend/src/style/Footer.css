@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
+
+.cineverse-footer {
+  background: linear-gradient(90deg, #d8561d 0%, #f9a86b 100%);
+  color: #f9f3e5;
+  font-family: 'Boogaloo', cursive;
+  padding: 2rem 4rem;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-logo img {
+  width: 100px;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo h3 {
+  font-size: 1.75rem;
+  margin: 0.5rem 0;
+}
+
+.footer-section {
+  min-width: 180px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-section h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #f9f3e5;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section a {
+  font-size: 1rem;
+  color: #f9f3e5;
+  text-decoration: none;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a:hover {
+  color: #000000;
+  transition: 0.3s ease;
+}
+
+.social-icons a {
+  margin-right: 0.5rem;
+  color: #f9f3e5;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  transition: background 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: #f9f3e5;
+  color: #d8561d;
+}
+
+.footer-divider {
+  margin: 2rem 0 1rem;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.9rem;
+}

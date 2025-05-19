@@ -1,0 +1,62 @@
+.leaderboard-appbar {
+  background-color: #d86116 !important;
+  box-shadow: none;
+  padding: 0 2rem;
+}
+
+.leaderboard-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-img {
+  height: 120px;
+  margin-right: 10px;
+}
+
+.leaderboard-toolbar .MuiButton-root {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff !important;
+  text-transform: uppercase;
+  margin-left: 1rem;
+}
+
+.leaderboard-page {
+  background-color: #fef7e5;
+  min-height: 100vh;
+  font-family: 'Boogaloo', sans-serif;
+  padding-top: 2rem;
+}
+
+.leaderboard-card {
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.leaderboard-card .MuiAvatar-root {
+  width: 56px;
+  height: 56px;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.leaderboard-icon {
+  margin-right: 0.5rem;
+}
+
+.leaderboard-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
