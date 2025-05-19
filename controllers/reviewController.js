@@ -47,12 +47,14 @@ const updateReview = async (req, res) => {
 const deleteReview = async (req, res) => {
   const { reviewId } = req.params;
   const userId = req.user.id;
+  const userRole = req.user.role;
 
   try {
     const review = await Review.findByPk(reviewId);
     if (!review) return res.status(404).json({ message: "Review not found." });
 
-    if (review.user_id !== userId) {
+    // Allow deletion if the user owns the review OR is an admin
+    if (review.user_id !== userId && userRole !== 'admin') {
       return res.status(403).json({ message: "You can only delete your own reviews." });
     }
 
@@ -64,6 +66,8 @@ const deleteReview = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
 
 // Helper to update movie's average rating and total_reviews
 const updateMovieRating = async (movieId) => {
@@ -92,12 +96,13 @@ const getReviewsForMovie = async (req, res) => {
   try {
     const reviews = await Review.findAll({
       where: { movie_id: movieId },
-      include: [
-        {
-          model: User,
-          attributes: ['id', 'username']
-        }
-      ],
+    include: [
+    {
+      model: User,
+      as: 'user', // ✅ must match what you defined above
+      attributes: ['id', 'username']
+    }
+  ],
       order: [['createdAt', 'DESC']]
     });
 
@@ -107,10 +112,35 @@ const getReviewsForMovie = async (req, res) => {
   }
 };
 
+const getReviewsByUser = async (req, res) => {
+  console.log('User:', req.user);
+
+  const userId = req.user.id;
+
+  try {
+    const reviews = await Review.findAll({
+      where: { user_id: userId },
+      include: [{
+        model: Movie,
+        as: 'movie', // 👈 critical fix
+        attributes: ['id', 'title', 'posterUrl']
+      }],
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.error('Error in GET /reviews/user:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 module.exports = {
   createReview,
   updateReview,
   deleteReview,
   getReviewsForMovie,
+  getReviewsByUser,
   updateMovieRating
 };

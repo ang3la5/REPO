@@ -13,6 +13,8 @@ const recommendationRoutes = require('./routes/recommendationRoutes');
 const seriesImportRoutes = require('./routes/seriesImportRoutes');
 const seasonRoutes = require('./routes/seasonRoutes');
 const episodeRoutes = require('./routes/episodeRoutes');
+const movieImportRoutes = require('./routes/movieImportRoutes');
+const tmdbRoutes = require('./routes/tmdbRoutes');
 
 require('dotenv').config();
 
@@ -24,9 +26,8 @@ app.use(express.json());
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("MySQL Connected with Sequelize");
-    await sequelize.sync({ alter: true });
-    console.log("Database synchronized");
+console.log("✅ MySQL connection established (Sequelize)");
+
   } catch (error) {
     console.error("Database connection failed:", error);
     process.exit(1);
@@ -42,9 +43,11 @@ app.use('/api/preferences', preferenceRoutes);
 app.use('/api/lists', listRoutes);
 app.use('/api/stats', statRoutes);
 app.use('/api/movies', recommendationRoutes); 
-app.use('/api/movies', seriesImportRoutes);
+app.use('/api/series', seriesImportRoutes);
 app.use('/api/seasons', seasonRoutes);
 app.use('/api/episodes', episodeRoutes);
+app.use('/api/movies', movieImportRoutes);
+app.use('/api/tmdb', tmdbRoutes);
 
 
 // Start Server

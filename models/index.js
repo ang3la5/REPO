@@ -15,11 +15,12 @@ UserList.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
 UserList.belongsToMany(Movie, { through: ListMovie, foreignKey: 'list_id', as: 'movies' });
 Movie.belongsToMany(UserList, { through: ListMovie, foreignKey: 'movie_id', as: 'lists' });
+List.belongsToMany(Series, { through: 'ListSeries', foreignKey: 'list_id' });
+Series.belongsToMany(List, { through: 'ListSeries', foreignKey: 'series_id' });
 
-
-User.hasMany(Review, { foreignKey: 'user_id' });
+User.hasMany(Review, { foreignKey: 'user_id', as: 'reviews' });
 Movie.hasMany(Review, { foreignKey: 'movie_id', as: 'reviews' });
-Review.belongsTo(User, { foreignKey: 'user_id' });
+Review.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 Review.belongsTo(Movie, { foreignKey: 'movie_id', as: 'movie' });
 
 

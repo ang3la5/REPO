@@ -4,6 +4,6 @@ const { authenticate, isAdmin } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.post('/import-series', authenticate, isAdmin, importSeries);
+router.post('/import-series', authenticate, importSeries);
 
 module.exports = router;

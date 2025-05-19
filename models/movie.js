@@ -13,7 +13,8 @@ const Movie = sequelize.define('Movie', {
     defaultValue: 'movie'
   },
   actors: { type: DataTypes.STRING },       // Comma-separated list
-  directors: { type: DataTypes.STRING }
+  directors: { type: DataTypes.STRING },
+  posterUrl: { type: DataTypes.STRING, allowNull: true }
 });
 
 module.exports = Movie;
