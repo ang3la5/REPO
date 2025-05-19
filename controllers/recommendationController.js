@@ -1,18 +1,25 @@
 const { Movie, Review, MoviePreference } = require('../models');
 const { Op } = require('sequelize');
+const axios = require('axios');
+const { getPersonIdByName, getGenreIdByName } = require('../utils/tmdbFetcher');
+
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 exports.getRecommendations = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    // Get preferences
     const prefs = await MoviePreference.findOne({ where: { user_id: userId } });
+    console.log('Raw prefs:', prefs);
 
-    // Get most-reviewed genre from their stats
     const userReviews = await Review.findAll({
       where: { user_id: userId },
-      include: [{ model: Movie, as: 'movie', attributes: ['genre'] }]
+      include: [{ model: Movie, as: 'movie', attributes: ['genre', 'title'] }]
     });
+
+    const reviewedTitles = userReviews.map(r =>
+      r.movie?.title?.toLowerCase().trim()
+    ).filter(Boolean);
 
     const genreCount = {};
     userReviews.forEach(r => {
@@ -29,41 +36,101 @@ exports.getRecommendations = async (req, res) => {
       }
     }
 
-    // Build search conditions based on preferences and top genre
-    const conditions = [];
-
-    if (prefs?.genre_preference) {
-      conditions.push({ genre: prefs.genre_preference });
+    // 🎯 Resolve genres
+    const genreIds = [];
+    const userGenres = prefs?.genre_preference?.split(',').map(g => g.trim()) || [];
+    for (const g of userGenres) {
+      const id = getGenreIdByName(g);
+      if (id && !genreIds.includes(id)) genreIds.push(id);
     }
 
-    if (topGenre) {
-      conditions.push({ genre: topGenre });
+    const topGenreId = getGenreIdByName(topGenre);
+    if (topGenreId && !genreIds.includes(topGenreId)) {
+      genreIds.push(topGenreId);
     }
 
-    const actorKeywords = prefs?.favorite_actors?.split(',').map(a => a.trim());
-    const directorKeywords = prefs?.favorite_directors?.split(',').map(d => d.trim());
+    // 👥 Resolve people
+    const actorNames = prefs?.favorite_actors?.split(',').map(s => s.trim()).filter(Boolean) || [];
+    const directorNames = prefs?.favorite_directors?.split(',').map(s => s.trim()).filter(Boolean) || [];
+    const allNames = [...actorNames, ...directorNames];
+    const peopleIds = [];
 
-    if (actorKeywords?.length) {
-      actorKeywords.forEach(keyword => {
-        conditions.push({ description: { [Op.like]: `%${keyword}%` } });
-      });
+    for (const name of allNames) {
+      const id = await getPersonIdByName(name);
+      if (id) peopleIds.push(id);
     }
 
-    if (directorKeywords?.length) {
-      directorKeywords.forEach(keyword => {
-        conditions.push({ description: { [Op.like]: `%${keyword}%` } });
-      });
+    console.log('Genres:', genreIds);
+    console.log('People:', peopleIds);
+    console.log('Reviewed titles:', reviewedTitles);
+
+    const baseParams = {
+      api_key: TMDB_API_KEY,
+      sort_by: 'popularity.desc',
+      language: 'en-US',
+      page: 1
+    };
+
+    const filteredParams = { ...baseParams };
+    if (genreIds.length) filteredParams.with_genres = genreIds.join(',');
+    if (peopleIds.length) filteredParams.with_people = peopleIds.join(',');
+
+    const [movieRes, tvRes] = await Promise.all([
+      axios.get(`https://api.themoviedb.org/3/discover/movie`, { params: filteredParams }),
+      axios.get(`https://api.themoviedb.org/3/discover/tv`, { params: filteredParams })
+    ]);
+
+    const scoreResults = (items, isTV = false) => {
+      return (items || []).map(item => {
+        const title = (item.title || item.name || '').toLowerCase().trim();
+        if (reviewedTitles.includes(title)) return null;
+
+        const genreScore = item.genre_ids?.reduce((sum, id) => sum + (genreIds.includes(id) ? 2 : 0), 0) || 0;
+        const personScore = peopleIds.length ? 3 : 0; // basic weight if people matched in query
+
+        const score = genreScore + personScore;
+
+        return {
+          id: item.id,
+          title: isTV ? item.name : item.title,
+          posterUrl: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null,
+          type: isTV ? 'tv' : 'movie',
+          score,
+          popularity: item.popularity || 0
+        };
+      }).filter(Boolean).sort((a, b) => b.score - a.score || b.popularity - a.popularity).slice(0, 10);
+    };
+
+    let recommendedMovies = scoreResults(movieRes.data.results);
+    let recommendedTV = scoreResults(tvRes.data.results, true);
+
+    // 🔁 Fallback: genre only
+    if (!recommendedMovies.length && genreIds.length) {
+      const genreOnlyParams = { ...baseParams, with_genres: genreIds.join(',') };
+      const fallbackMovieRes = await axios.get(`https://api.themoviedb.org/3/discover/movie`, { params: genreOnlyParams });
+      recommendedMovies = scoreResults(fallbackMovieRes.data.results);
     }
 
-    const recommendations = await Movie.findAll({
-      where: {
-        [Op.or]: conditions
-      },
-      limit: 10
-    });
+    if (!recommendedTV.length && genreIds.length) {
+      const genreOnlyParams = { ...baseParams, with_genres: genreIds.join(',') };
+      const fallbackTVRes = await axios.get(`https://api.themoviedb.org/3/discover/tv`, { params: genreOnlyParams });
+      recommendedTV = scoreResults(fallbackTVRes.data.results, true);
+    }
 
-    res.status(200).json({ recommended: recommendations });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    if (!recommendedMovies.length) {
+      const fallbackMovieRes = await axios.get(`https://api.themoviedb.org/3/discover/movie`, { params: baseParams });
+      recommendedMovies = scoreResults(fallbackMovieRes.data.results);
+    }
+
+    if (!recommendedTV.length) {
+      const fallbackTVRes = await axios.get(`https://api.themoviedb.org/3/discover/tv`, { params: baseParams });
+      recommendedTV = scoreResults(fallbackTVRes.data.results, true);
+    }
+
+    res.json({ movies: recommendedMovies, tvShows: recommendedTV });
+
+  } catch (err) {
+    console.error('TMDb recommendation error:', err.message);
+    res.status(500).json({ error: 'Failed to fetch recommendations' });
   }
 };
