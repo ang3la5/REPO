@@ -15,6 +15,7 @@ const seasonRoutes = require('./routes/seasonRoutes');
 const episodeRoutes = require('./routes/episodeRoutes');
 const movieImportRoutes = require('./routes/movieImportRoutes');
 const tmdbRoutes = require('./routes/tmdbRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 require('dotenv').config();
 
@@ -48,6 +49,7 @@ app.use('/api/seasons', seasonRoutes);
 app.use('/api/episodes', episodeRoutes);
 app.use('/api/movies', movieImportRoutes);
 app.use('/api/tmdb', tmdbRoutes);
+app.use('/api/contact', contactRoutes); 
 
 
 // Start Server

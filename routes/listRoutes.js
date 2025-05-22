@@ -5,7 +5,6 @@ const { createList, addMovieToList, getUserLists, deleteList, updateList, remove
 
 const router = express.Router();
 
-
 router.delete('/:listId/movie/:movieId', authenticate, removeMovieFromList);
 router.post('/:id/add-series', authenticate, addSeriesToList);
 router.get('/user', authenticate, getUserLists); // cleaner
