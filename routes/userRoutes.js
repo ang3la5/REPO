@@ -21,9 +21,6 @@ router.post('/login', loginUser);
 router.put('/me', authenticate, updateUserProfile);
 
 
-// Promote User to Admin (Protected Route - Admin Only)
-router.put('/promote/:id', authenticate, isAdmin, promoteUserToAdmin);
-
 router.get('/me', authenticate, async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id, {

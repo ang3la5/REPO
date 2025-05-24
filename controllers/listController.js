@@ -1,4 +1,6 @@
-const { UserList, Movie } = require('../models');
+const { UserList, Movie, Series } = require('../models');
+const { UserList: List } = require('../models');
+
 
 exports.createList = async (req, res) => {
   const userId = req.user.id;
@@ -155,8 +157,8 @@ exports.addSeriesToList = async (req, res) => {
       return res.status(403).json({ message: 'Not authorized to modify this list' });
     }
 
-    await list.addSeries(seriesId); // Sequelize many-to-many magic
-
+    const movie = await Movie.findOne({ where: { id: seriesId, type: 'series' } });
+    await list.addMovie(movie);
     res.status(200).json({ message: 'Series added to list successfully' });
   } catch (err) {
     console.error('Error adding series to list:', err);
