@@ -1,20 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  TextField, Box, Typography, Container, AppBar, Toolbar, Button, IconButton
+  TextField, Box, Typography, Container, AppBar, Toolbar, Button, IconButton, Snackbar, Alert
 } from '@mui/material';
 import '../style/ContactPage.css';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import LanguageIcon from '@mui/icons-material/Language';
+import axios from '../api/axios'; // ✅ your custom axios instance
 
 const ContactPage = () => {
-  const { t,i18n  } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-const toggleLanguage = () => {
+  const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'gr' : 'en';
     i18n.changeLanguage(newLang);
-};
+  };
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const [alert, setAlert] = useState({ open: false, severity: 'success', message: '' });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post('/contact', formData);
+      setAlert({ open: true, severity: 'success', message: t('contacts.success') });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Contact form error:', error.response?.data || error.message);
+      setAlert({ open: true, severity: 'error', message: t('contacts.error') });
+    }
+  };
 
   return (
     <div className="contact-page">
@@ -37,6 +65,7 @@ const toggleLanguage = () => {
           </Box>
         </Toolbar>
       </AppBar>
+
       <Container maxWidth="sm" className="contact-container">
         <Typography variant="h4" className="contact-title">
           📬 {t('contacts.title')}
@@ -45,9 +74,12 @@ const toggleLanguage = () => {
           {t('contacts.subtitle')}
         </Typography>
 
-        <Box component="form" className="contact-form">
+        <Box component="form" onSubmit={handleSubmit} className="contact-form">
           <TextField
             label={t('contacts.name')}
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             variant="outlined"
             fullWidth
             required
@@ -55,7 +87,10 @@ const toggleLanguage = () => {
           />
           <TextField
             label={t('contacts.email')}
+            name="email"
             type="email"
+            value={formData.email}
+            onChange={handleChange}
             variant="outlined"
             fullWidth
             required
@@ -63,12 +98,18 @@ const toggleLanguage = () => {
           />
           <TextField
             label={t('contacts.subject')}
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
             variant="outlined"
             fullWidth
             className="contact-input"
           />
           <TextField
             label={t('contacts.message')}
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             variant="outlined"
             multiline
             rows={5}
@@ -77,11 +118,21 @@ const toggleLanguage = () => {
             className="contact-input"
           />
 
-          <Button variant="contained" color="primary" className="contact-submit">
+          <Button type="submit" variant="contained" color="primary" className="contact-submit">
             {t('contacts.send')}
           </Button>
         </Box>
       </Container>
+
+      <Snackbar
+        open={alert.open}
+        autoHideDuration={6000}
+        onClose={() => setAlert({ ...alert, open: false })}
+      >
+        <Alert severity={alert.severity} onClose={() => setAlert({ ...alert, open: false })}>
+          {alert.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

@@ -87,7 +87,7 @@ const SeriesDetailPage = () => {
  const handleAddToList = async () => {
     if (!selectedListId) return;
     try {
-      await axios.post(`/lists/${selectedListId}/add`, {
+      await axios.post(`/lists/${selectedListId}/add-series`, {
         seriesId: series.id // Ensure backend supports this
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

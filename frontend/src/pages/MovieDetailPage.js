@@ -230,16 +230,19 @@ const MovieDetailPage = () => {
               <Typography variant="body2" sx={{ mt: 1 }}>{review.rating} / 10</Typography>
               <Typography variant="body2" sx={{ mt: 1 }}>{review.comment}</Typography>
 
-              {(user && (review.user_id === user.id || user.role === 'admin')) && (
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => handleDelete(review.id)}
-                  sx={{ mt: 1 }}
-                >
-                  🗑️ Delete
-                </Button>
+             {user?.id && (
+                (review.user_id === user.id || user.role === 'admin') && (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => handleDelete(review.id)}
+                    sx={{ mt: 1 }}
+                  >
+                    🗑️ Delete
+                  </Button>
+                )
               )}
+
 
             </CardContent>
           </Card>

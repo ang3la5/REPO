@@ -1,6 +1,29 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../api/axios';
+import { jwtDecode } from 'jwt-decode'; // ✅ Correct way
 
+
+// ✅ Decode the token and extract user info
+const token = localStorage.getItem('token');
+let user = null;
+
+try {
+  user = token ? jwtDecode(token) : null;
+} catch (e) {
+  console.error("Invalid token", e);
+  localStorage.removeItem('token'); // clean up corrupted token
+  user = null;
+}
+
+// ✅ Define initial state using decoded user
+const initialState = {
+  user,
+  token,
+  status: 'idle',
+  error: null,
+};
+
+// ✅ Thunks
 export const registerUser = createAsyncThunk(
   'auth/register',
   async (userData, { rejectWithValue }) => {
@@ -25,14 +48,10 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+// ✅ Slice
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: null,
-    token: localStorage.getItem('token') || null,
-    status: 'idle',
-    error: null,
-  },
+  initialState,
   reducers: {
     logout: (state) => {
       state.user = null;
@@ -42,14 +61,13 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // REGISTER
       .addCase(registerUser.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.user = action.payload.user;
+        state.user = jwtDecode(action.payload.token); // ✅ use token to decode user
         state.token = action.payload.token;
         localStorage.setItem('token', action.payload.token);
       })
@@ -58,14 +76,13 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
 
-      // LOGIN
       .addCase(loginUser.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.user = action.payload.user;
+        state.user = jwtDecode(action.payload.token); // ✅ use token to decode user
         state.token = action.payload.token;
         localStorage.setItem('token', action.payload.token);
       })
